@@ -2,60 +2,61 @@
 # ##########  DAYS BEFORE XMAS ###########
 # 🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️🎄⭐️
 
-
-# Write a method which 
-# returns the number of days until next Xmas
+# Write a method which returns the number of days until next Xmas
 # using TDD (Test driven development)
 
 # Opt1: return number of days for any date!
 # Opt2: make it work after Dec 25th
 
-
-#        ____________   
+# ########################################
+# FOCUS ON THE METHOD
+# ########################################
+#        ____________
 #  [IN] | (params)   |  [OUT]
-# ----->|   method   |----------> 
+# ----->|   method   |---------->
 #  args |____________| returned
-#                       value 
+#                       value
 
-# Method name: days_until_xmas
 # Method signature (params? returned value?):
-# params: no params (but day, month, year for opt1)
-# returned: integer
+# - name: days_until_xmas
+# - params: 1 param (Date)
+# - returned: Integer
 
+# ########################################
+# LIVECODE
+# ########################################
 
-# Code
-# First, we have to require date 
-# We need to make a method definition
-# no parameters
-# Define today
-# Define Xmas day
-# Return Xmas - Today
-# Change to integer 
+# PSEUDOCODE
+# 0. require date
+# 1. define xmas (Date) store in a variable
+# 2. define today (Date) store in a variable
+# 3. Substract the two dates, convert to Integer
+# 4. return
+
+# CODE
 require "date"
 
-def days_until_xmas(someday = Date.today)
+def days_until_xmas(date = Date.today)
   # today = Date.today
-  xmas = Date.new(someday.year,12,25)
-  return (xmas - someday).to_i 
+  xmas = Date.new(2024, 12, 25)
+  days = (xmas - date).to_i
+  return days < 0 ? days + 365 : days
 end
 
-# Tests
-# consider that the method exists
-# puts "-- Test 1 ⛄️ -- "
-puts "should return an integer"
-puts "Result:"
-puts days_until_xmas().class == Integer
+# TESTS
+# Hint: write tests considering that the method exists
+puts "-- Test 4 ⭐️ -- "
+puts "Result: "
+puts days_until_xmas(Date.new(2024, 12, 26)) == 364
 
-# puts "-- Test 2 🎄 -- "
-puts "should return 88 today"
-puts "Result:"
-puts days_until_xmas == 88
+puts "-- Test 1 ⛄️ -- "
+puts "Result: "
+puts days_until_xmas == 90
 
-puts "-- Test 3 🎅 -- "
-puts "should return 0 on Xmas day"
-puts "Result:"
-puts days_until_xmas(Date.new(2021,12,25)) == 0
+puts "-- Test 2 🎄 -- "
+puts "Result: "
+puts days_until_xmas.class == Integer
 
-# puts "-- Test 4 🎅 -- "
-
-# puts "-- Test 5 🎅 -- "
+puts "-- Test 3 🤶 -- "
+puts "Result: "
+puts days_until_xmas <= 365
